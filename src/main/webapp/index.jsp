@@ -67,6 +67,24 @@
         }
 
         // Angie Evangelista
+        nombreNormalizado = strNombre.trim();
+        correoNormalizado = strCorreo.trim().toLowerCase();
+        cuponNormalizado = strCupon.trim().toUpperCase();
+
+        String nombreSinEspacios = nombreNormalizado.replace(" ", "");
+        if (nombreSinEspacios.isEmpty() || nombreSinEspacios.length() < 3) {
+            listaErrores.add("El nombre del cliente debe tener al menos 3 caracteres útiles (sin contar espacios).");
+        }
+
+        if (!correoNormalizado.contains("@")) {
+            listaErrores.add("El correo electrónico debe incluir el carácter obligatorio '@'.");
+        } else if (!correoNormalizado.endsWith(".com") && !correoNormalizado.endsWith(".pe")) {
+            listaErrores.add("El correo electrónico debe terminar con el dominio '.com' o '.pe'.");
+        }
+
+        if (cuponNormalizado.equalsIgnoreCase("PROMO10")) {
+            aplicaDescuento = true;
+        }
 
 
         // Dante Alanya
