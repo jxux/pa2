@@ -87,7 +87,42 @@
         }
 
 
-        // Dante Alanya
+        // Dante Alanya Molina
+
+                    if (listaErrores.isEmpty()) {
+                    correlativoAleatorio = (int) Math.floor(Math.random() * 9000.0 + 1000.0);
+
+                    String prefijoNombre = nombreSinEspacios.substring(0, 3).toUpperCase();
+                    codigoCotizacion = "COT-".concat(prefijoNombre).concat("-").concat(String.valueOf(correlativoAleatorio));
+
+                    precioUnitario = Math.max(0.01, precioUnitario);
+                    cantidad = Math.max(1, cantidad);
+                    mesesFinanciamiento = Math.min(12, Math.max(1, mesesFinanciamiento));
+
+                    subtotal = precioUnitario * cantidad;
+
+                    if (aplicaDescuento) {
+                        montoDescuento = subtotal * 0.10;
+                    } else {
+                        montoDescuento = 0.0;
+                    }
+                    baseImponible = subtotal - montoDescuento;
+
+                    if (mesesFinanciamiento > 1) {
+                        double factorInteres = Math.pow(1.02, mesesFinanciamiento);
+                        double totalConInteres = baseImponible * factorInteres;
+                        montoInteres = totalConInteres - baseImponible;
+                        totalPagar = totalConInteres;
+                    } else {
+                        montoInteres = 0.0;
+                        totalPagar = baseImponible;
+                    }
+
+                    totalPagar = Math.round(totalPagar * 100.0) / 100.0;
+                    cuotaMensual = Math.ceil(totalPagar / mesesFinanciamiento);
+                } else {
+                    hayErrores = true;
+                }
 
     }
 %>
