@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%
     String strNombre = "";
     String strCorreo = "";
@@ -187,7 +190,6 @@
 
                     <button type="submit" class="btn btn-primary btn-sm w-100">Procesar Cotización</button>
                 </form>
-            </div>
         </div>
     </div>
 
