@@ -156,7 +156,84 @@
         </div>
     </div>
 
-    <%-- Misael Solis--%>
+        <div class="col-md-6">
+            <% if (!esPost) { %>
+                <div class="bg-white p-4 rounded border text-muted small text-center">
+                    Ingrese los datos del formulario y presione "Procesar Cotización".
+                </div>
+
+            <% } else if (hayErrores) { %>
+                <div class="alert alert-danger small p-3 rounded border">
+                    <div class="fw-bold mb-2">Errores encontrados:</div>
+                    <ul class="mb-0 ps-3">
+                        <% for (String err : listaErrores) { %>
+                            <li><%= err %></li>
+                        <% } %>
+                    </ul>
+                </div>
+
+            <% } else { %>
+                <div class="bg-white p-4 rounded border">
+                    <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                        <h5 class="mb-0">Resumen de Cotización</h5>
+                        <span class="badge bg-secondary"><%= codigoCotizacion %></span>
+                    </div>
+
+                    <table class="table table-sm table-bordered small mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="bg-light" style="width: 45%;">Cliente</th>
+                                <td><%= nombreNormalizado %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Correo</th>
+                                <td><%= correoNormalizado %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Precio Unitario</th>
+                                <td>S/ <%= String.format("%.2f", precioUnitario) %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Cantidad</th>
+                                <td><%= cantidad %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Subtotal</th>
+                                <td>S/ <%= String.format("%.2f", subtotal) %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Cupón</th>
+                                <td><%= aplicaDescuento ? "PROMO10 (-10%)" : "No aplica" %></td>
+                            </tr>
+                            <% if (aplicaDescuento) { %>
+                                <tr>
+                                    <th class="bg-light">Descuento</th>
+                                    <td>- S/ <%= String.format("%.2f", montoDescuento) %></td>
+                                </tr>
+                            <% } %>
+                            <tr>
+                                <th class="bg-light">Plazo</th>
+                                <td><%= mesesFinanciamiento %> <%= mesesFinanciamiento == 1 ? "mes" : "meses" %></td>
+                            </tr>
+                            <% if (mesesFinanciamiento > 1) { %>
+                                <tr>
+                                    <th class="bg-light">Interés Compuesto</th>
+                                    <td>+ S/ <%= String.format("%.2f", montoInteres) %></td>
+                                </tr>
+                            <% } %>
+                            <tr class="table-light fw-bold">
+                                <th>Total a Pagar</th>
+                                <td>S/ <%= String.format("%.2f", totalPagar) %></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Cuota Mensual</th>
+                                <td>S/ <%= String.format("%.2f", cuotaMensual) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <% } %>
+        </div>
 
 
 </div>
